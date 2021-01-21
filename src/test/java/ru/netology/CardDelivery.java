@@ -65,7 +65,7 @@ public class CardDelivery {
         $("[data-test-id='phone'] input").setValue("+7987654321");
         $("[data-test-id='agreement']").click();
         $$("button").find(exactText("Забронировать")).click();
-        $("[data-test-id=phone].input_invalid .input__sub")
+        $("[data-test-id=phone] .input_invalid .input__sub")
                 .shouldHave(text("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678."));
     }
     @Test
@@ -112,7 +112,7 @@ public class CardDelivery {
         $("[data-test-id='name'] input").setValue("Виктория Патрина");
         $("[data-test-id='phone'] input").setValue("+79876543210");
         $$("button").find(exactText("Забронировать")).click();
-        $("[data-test-id=agreement].input_invalid .checkbox__text")
+        $("[data-test-id=agreement] .input_invalid .checkbox__text")
                 .shouldHave(text("Я соглашаюсь с условиями обработки и использования моих персональных данных"));
     }
 
@@ -128,7 +128,7 @@ public class CardDelivery {
         $("[data-test-id='phone'] input").setValue("+79876543210");
         $("[data-test-id='agreement']").click();
         $$("button").find(exactText("Забронировать")).click();
-        $("[data-test-id=name].input_invalid .input__sub")
+        $("[data-test-id=name] .input_invalid .input__sub")
                 .shouldHave(text("Поле обязательно для заполнения"));
     }
     @Test
@@ -143,7 +143,7 @@ public class CardDelivery {
         $("[data-test-id='name'] input").setValue("Виктория Патрина");
         $("[data-test-id='agreement']").click();
         $$("button").find(exactText("Забронировать")).click();
-        $("[data-test-id=phone].input_invalid .input__sub")
+        $("[data-test-id=phone] .input_invalid .input__sub")
                 .shouldHave(text("Поле обязательно для заполнения"));
     }
     @Test
@@ -179,7 +179,7 @@ public class CardDelivery {
         $("[data-test-id='phone'] input").setValue("+79876543210");
         $("[data-test-id='agreement']").click();
         $$("button").find(exactText("Забронировать")).click();
-        $("[data-test-id=city].input_invalid .input__sub")
+        $("[data-test-id=city] .input_invalid .input__sub")
                 .shouldHave(text("Поле обязательно для заполнения"));
     }
 }
