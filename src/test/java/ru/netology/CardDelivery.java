@@ -12,6 +12,13 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class CardDelivery {
+    String formateDate(int plusDays) {
+        LocalDate dateOfDelivery = LocalDate.now().plusDays(plusDays);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        return  formatter.format(dateOfDelivery);
+    }
+
+
     @BeforeEach
     void setup () {
         open("http://localhost:9999/");
@@ -21,9 +28,7 @@ public class CardDelivery {
     void shouldCorrectForm() {
         $("[data-test-id='city'] input").setValue("Москва");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-        LocalDate dateOfDelivery = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String date = formatter.format(dateOfDelivery);
+        String date = this.formateDate(5);
 
         $("[data-test-id='date'] input").setValue(date);
         $("[data-test-id='name'] input").setValue("Виктория Патрина");
@@ -32,16 +37,15 @@ public class CardDelivery {
         $$("button").find(exactText("Забронировать")).click();
         $(byText("Успешно!")).waitUntil(visible, 11000);
         $("[data-test-id=notification] .notification__content")
-                .shouldHave(text("Встреча успешно забронирована на"));
+                .shouldHave(text("Встреча успешно забронирована на "+date));
     }
 
     @Test
     void shouldTestNotCorrectCity() {
         $("[data-test-id='city'] input").setValue("Лыткарино");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-        LocalDate dateOfDelivery = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String date = formatter.format(dateOfDelivery);
+        String date = this.formateDate(3);
+
 
         $("[data-test-id='date'] input").setValue(date);
         $("[data-test-id='name'] input").setValue("Виктория Патрина");
@@ -56,9 +60,7 @@ public class CardDelivery {
     void shouldTestNotCorrectPhone() {
         $("[data-test-id='city'] input").setValue("Москва");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-        LocalDate dateOfDelivery = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String date = formatter.format(dateOfDelivery);
+        String date = this.formateDate(3);
 
         $("[data-test-id='date'] input").setValue(date);
         $("[data-test-id='name'] input").setValue("Виктория Патрина");
@@ -72,9 +74,7 @@ public class CardDelivery {
     void shouldTestNotCorrectData() {
         $("[data-test-id='city'] input").setValue("Москва");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-        LocalDate dateOfDelivery = LocalDate.now().plusDays(2);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String date = formatter.format(dateOfDelivery);
+        String date = this.formateDate(2);
 
         $("[data-test-id='date'] input").setValue(date);
         $("[data-test-id='name'] input").setValue("Виктория Патрина");
@@ -88,9 +88,7 @@ public class CardDelivery {
     void shouldTestNotCorrectName() {
         $("[data-test-id='city'] input").setValue("Москва");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-        LocalDate dateOfDelivery = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String date = formatter.format(dateOfDelivery);
+        String date = this.formateDate(3);
 
         $("[data-test-id='date'] input").setValue(date);
         $("[data-test-id='name'] input").setValue("Victoria Patrina");
@@ -104,9 +102,7 @@ public class CardDelivery {
     void shouldTestNotAgreement() {
         $("[data-test-id='city'] input").setValue("Москва");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-        LocalDate dateOfDelivery = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String date = formatter.format(dateOfDelivery);
+        String date = this.formateDate(3);
 
         $("[data-test-id='date'] input").setValue(date);
         $("[data-test-id='name'] input").setValue("Виктория Патрина");
@@ -120,9 +116,7 @@ public class CardDelivery {
     void shouldTestEmptyName() {
         $("[data-test-id='city'] input").setValue("Москва");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-        LocalDate dateOfDelivery = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String date = formatter.format(dateOfDelivery);
+        String date = this.formateDate(3);
 
         $("[data-test-id='date'] input").setValue(date);
         $("[data-test-id='phone'] input").setValue("+79876543210");
@@ -135,9 +129,7 @@ public class CardDelivery {
     void shouldTestEmptyPhone() {
         $("[data-test-id='city'] input").setValue("Москва");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-        LocalDate dateOfDelivery = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String date = formatter.format(dateOfDelivery);
+        String date = this.formateDate(3);
 
         $("[data-test-id='date'] input").setValue(date);
         $("[data-test-id='name'] input").setValue("Виктория Патрина");
@@ -150,6 +142,7 @@ public class CardDelivery {
     void shouldTestEmptyData() {
         $("[data-test-id='city'] input").setValue("Москва");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
+        String date = this.formateDate(3);
 
 
         $("[data-test-id='name'] input").setValue("Виктория Патрина");
@@ -170,9 +163,7 @@ public class CardDelivery {
     @Test
     void shouldTestEmptyCity() {
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-        LocalDate dateOfDelivery = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String date = formatter.format(dateOfDelivery);
+        String date = this.formateDate(3);
 
         $("[data-test-id='date'] input").setValue(date);
         $("[data-test-id='name'] input").setValue("Виктория Патрина");
