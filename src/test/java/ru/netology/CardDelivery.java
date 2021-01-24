@@ -25,7 +25,7 @@ public class CardDelivery {
     }
 
     @Test
-    void shouldCorrectForm() {
+    void shouldSuccessfulSendCorrectForm() {
         $("[data-test-id='city'] input").setValue("Москва");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         String date = this.formateDate(5);
@@ -41,7 +41,7 @@ public class CardDelivery {
     }
 
     @Test
-    void shouldTestNotCorrectCity() {
+    void shouldGetErrorWithIncorrectCity() {
         $("[data-test-id='city'] input").setValue("Лыткарино");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         String date = this.formateDate(3);
@@ -57,7 +57,7 @@ public class CardDelivery {
     }
 
     @Test
-    void shouldTestNotCorrectPhone() {
+    void shouldGetErrorWithIncorrectPhone() {
         $("[data-test-id='city'] input").setValue("Москва");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         String date = this.formateDate(3);
@@ -71,7 +71,7 @@ public class CardDelivery {
                 .shouldHave(text("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678."));
     }
     @Test
-    void shouldTestNotCorrectData() {
+    void shouldGetErrorWithIncorrectData() {
         $("[data-test-id='city'] input").setValue("Москва");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         String date = this.formateDate(2);
@@ -85,7 +85,7 @@ public class CardDelivery {
                 .shouldHave(text("Заказ на выбранную дату невозможен"));
     }
     @Test
-    void shouldTestNotCorrectName() {
+    void shouldGetErrorWithIncorrectName() {
         $("[data-test-id='city'] input").setValue("Москва");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         String date = this.formateDate(3);
@@ -99,7 +99,7 @@ public class CardDelivery {
                 .shouldHave(text("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы."));
     }
     @Test
-    void shouldTestNotAgreement() {
+    void shouldGetErrorWithNotAgreement() {
         $("[data-test-id='city'] input").setValue("Москва");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         String date = this.formateDate(3);
@@ -113,7 +113,7 @@ public class CardDelivery {
     }
 
     @Test
-    void shouldTestEmptyName() {
+    void shouldGetErrorWithEmptyName() {
         $("[data-test-id='city'] input").setValue("Москва");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         String date = this.formateDate(3);
@@ -126,7 +126,7 @@ public class CardDelivery {
                 .shouldHave(text("Поле обязательно для заполнения"));
     }
     @Test
-    void shouldTestEmptyPhone() {
+    void shouldGetErrorWithEmptyPhone() {
         $("[data-test-id='city'] input").setValue("Москва");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         String date = this.formateDate(3);
@@ -139,7 +139,7 @@ public class CardDelivery {
                 .shouldHave(text("Поле обязательно для заполнения"));
     }
     @Test
-    void shouldTestEmptyData() {
+    void shouldGetErrorWithEmptyData() {
         $("[data-test-id='city'] input").setValue("Москва");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         String date = this.formateDate(3);
@@ -153,7 +153,7 @@ public class CardDelivery {
                 .shouldHave(text("Неверно введена дата"));
     }
     @Test
-    void shouldTestEmptyForm() {
+    void shouldGetErrorWithEmptyForm() {
 
         $("[data-test-id='agreement']").click();
         $$("button").find(exactText("Забронировать")).click();
@@ -161,7 +161,7 @@ public class CardDelivery {
                 .shouldHave(text("Поле обязательно для заполнения"));
     }
     @Test
-    void shouldTestEmptyCity() {
+    void shouldGetErrorWithEmptyCity() {
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         String date = this.formateDate(3);
 
